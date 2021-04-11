@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "pointofcare53e9c2ee": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pointofcare-dev-131736-authRole",
+      "UnauthRoleArn": "arn:aws:iam::118063898288:role/amplify-pointofcare-dev-131736-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::118063898288:role/amplify-pointofcare-dev-131736-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-pointofcare-dev-131736-deployment",
+      "UnauthRoleName": "amplify-pointofcare-dev-131736-unauthRole",
+      "StackName": "amplify-pointofcare-dev-131736",
+      "StackId": "arn:aws:cloudformation:us-east-2:118063898288:stack/amplify-pointofcare-dev-131736/9556fe60-9afa-11eb-b61f-02afcd94e18e",
+      "AmplifyAppId": "d3am0yk7ynb3w2"
+    },
+    "categories": {
+      "auth": {
+        "pointofcare53e9c2ee": {}
+      }
+    }
+  }
+}
