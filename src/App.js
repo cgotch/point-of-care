@@ -83,7 +83,7 @@ function App() {
   //async functions
   async function authorizeUser(){
     const userInfo = await API.Auth.currentUserInfo();
-    setAdmin(userInfo.attributes.email !== ADMIN_USER);
+    setAdmin(userInfo.attributes.email === ADMIN_USER);
     setEmail(userInfo.attributes.email);
   }
 
@@ -156,12 +156,68 @@ function App() {
     }
   }
 
+  function searchRecords(filter){
+    setSearch(filter);
+    fetchRecords();
+  }
+
   return (
     <div className="classes.root">
       { admin === true && 
-        <h1>
-          adminUI
-        </h1>
+        <div>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton edge="start" className={classes.menuButton} color="inherit">
+                <MenuIcon/>
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                Point of Care Admin Portal: {email}
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={0} color="secondary">
+                  <NotificationsIcon/>
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer}/>
+            <Container maxWidth="lg" className={classes.container}>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined" 
+                    onChange={e => searchRecords(e.target.value)}
+                    placeholder="Search"
+                    value={search}
+                    style={{width: 300, marginRight: 10}}
+                  />
+                  <Button variant="contained" color="primary" className={classes.button} onClick={e => searchRecords(e.target.value)}>
+                    Search
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <div style={{height: 250, width: '100%'}}>
+                      <DataGrid
+                        rows={records}
+                        columns={columns}
+                        pageSize={5}
+                        disableSelectionOnClick={true}
+                        onRowClick={(rowData) => onRowClick(rowData)}
+                      />
+                    </div>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    {currentImage && <img src={image}/>}
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Container>
+          </main>
+        </div>
       }
       { admin === false && 
       <div>
