@@ -119,9 +119,14 @@ function App() {
 
   async function fetchRecords(){
     let userMail = email;
+    let isAdmin = admin;
+    let userInfo;
     if (userMail === ''){
-      const userInfo = await API.Auth.currentUserInfo();
+      userInfo = await API.Auth.currentUserInfo();
       userMail = userInfo.attributes.email;
+    }
+    if (isAdmin === false) {
+      isAdmin = userInfo.attributes.email === ADMIN_USER;
     }
     const apiData = await API.graphql({query: listRecords});
     if (apiData.data.listRecords.items.length !== 0) {
@@ -134,7 +139,7 @@ function App() {
         return record;
       }))
       //filter the records for non admins
-      if (admin === true) {
+      if (isAdmin) {
         if (search !== '') {
           setRecords(apiData.data.listRecords.items.filter(x => x.name.includes(search)));
         }
